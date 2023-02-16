@@ -172,7 +172,9 @@ test("test setting src on a frame toggles the [aria-busy=true] attribute", async
   await nextEventOnTarget(page, "with-src", "turbo:frame-load")
   await clearMutationsLogs(page)
 
-  await page.evaluate(() => (document.getElementById("with-src") as any).src = "/src/tests/fixtures/frames/with-src-2.html")
+  await page.evaluate(
+    () => ((document.getElementById("with-src") as any).src = "/src/tests/fixtures/frames/with-src-2.html")
+  )
   await nextEventOnTarget(page, "with-src", "turbo:frame-load")
 
   assert.equal(await nextAttributeMutationNamed(page, "with-src", "busy"), "", "sets [busy] on frame #with-src")
